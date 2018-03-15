@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "username": "impig1023",
+      "password": "12356",
+      "nickname": "毒电波",
+      "role": "developer",
+      "sex": "male"
+    }
+  ]
+}
