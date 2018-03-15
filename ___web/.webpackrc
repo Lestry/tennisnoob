@@ -1,5 +1,10 @@
 {
   "extraBabelPlugins": [
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
-  ]
+  ],
+  "outputPath": "../views",
+  "html": {
+    "template": "./public/index.ejs",
+    "filename": "../views/index.ejs"
+  }
 }
