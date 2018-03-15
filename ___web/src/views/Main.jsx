@@ -6,6 +6,8 @@ import Menu from 'antd/lib/menu';
 
 import { connect } from 'dva';
 
+import _ from 'lodash';
+
 import { SIDE_MENU } from '../constants/index';
 
 // 引入antd全局样式
@@ -15,16 +17,19 @@ import './main.less';
 
 // 匹配当前路由
 const getCurrentRoute = (location) => {
-  const url = location.pathname;
-
-  const currentRoute = SIDE_MENU.filter(menu => (new RegExp(menu.route).test(url)));
-
-  return currentRoute.length === 1 ? currentRoute[0].key : '';
+  const url = location ? location.pathname : '';
+  const mainRoute = _.find(SIDE_MENU, menu => (new RegExp(menu.route).test(url)));
+  const subRoute = mainRoute && Array.isArray(mainRoute.sub) ?
+    _.find(mainRoute.sub, subMenu => (new RegExp(subMenu.route).test(url))) : null
+  return {
+    mainRoute,
+    subRoute
+  };
 }
 
 class Main extends React.PureComponent {
-  static contextTypes = {
-    router: PropTypes.object.isRequired
+  static propTypes = {
+    children: PropTypes.array
   };
 
   render() {
@@ -49,16 +54,18 @@ class Main extends React.PureComponent {
 
   // 渲染侧边菜单
   renderSideMenu() {
-    const activeMenu = getCurrentRoute(this.props.location)
-
+    const currRoute = getCurrentRoute(this.props.location)
+    const mainRouteKey = currRoute.mainRoute ? currRoute.mainRoute.key : ''
+    const subRouteKey = currRoute.subRoute ? currRoute.subRoute.key : mainRouteKey
+    const defaultOpenMenus = SIDE_MENU.map(m => m.key)
     return (
       <div className="page-side-menu-container" style={this.STYLES.pageSideMenu}>
         <Menu
           mode="inline"
           className="page-side-menu"
           style={{ height: '100%' }}
-          selectedKeys={[activeMenu]}
-          openKeys={[activeMenu]}
+          selectedKeys={[subRouteKey]}
+          defaultOpenKeys={defaultOpenMenus}
           onClick={this.handleSelectMenu.bind(this)}
         >
           {
@@ -92,7 +99,8 @@ class Main extends React.PureComponent {
   // 点击菜单
   handleSelectMenu(params) {
     const { key } = params;
-    this.context.router.push(`/${key}`);
+    const { history } = this.props;
+    history.push(key);
   }
 
   STYLES = {

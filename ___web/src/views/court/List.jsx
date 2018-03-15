@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'dva';
 
-class ToolIndex extends React.PureComponent {
+class CourtList extends React.PureComponent {
   static propTypes = {
     
   };
@@ -16,16 +16,16 @@ class ToolIndex extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    
   }
 
   render() {
     return (
       <div>
-        工具
+        场地整理
       </div>
     )
   }
 }
 
-export default connect()(ToolIndex);
+export default connect()(CourtList);
