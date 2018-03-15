@@ -8,14 +8,19 @@ var router = express.Router();
 
 // 获取court-list
 router.get('/list', function(req, res) {
-	res.end(JSON.stringify({result: true, data: [{
-		id: '1',
-		date: '2018-03-15',
-		time: 2,
-		no: 3,
-		orderer: '电波',
-		orderer_name: '张先生'
-	}]}));
+	res.end(JSON.stringify({
+		result: true, 
+		data: [
+			{
+				id: '1',
+				date: '2018-03-15',
+				time: 2,
+				no: 3,
+				orderer: '电波',
+				orderer_name: '张先生'
+			}
+		]
+	}));
 });
 
 module.exports = router;

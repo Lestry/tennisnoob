@@ -1,7 +1,6 @@
-
 export default {
 
-  namespace: 'example',
+  namespace: 'court',
 
   state: {},
 
@@ -21,5 +20,5 @@ export default {
       return { ...state, ...action.payload };
     },
   },
-
+  
 };
