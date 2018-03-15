@@ -4,7 +4,7 @@
   ],
   "outputPath": "../views",
   "html": {
-    "template": "./public/index.ejs",
+    "template": "./template/index.ejs",
     "filename": "../views/index.ejs"
   }
 }
