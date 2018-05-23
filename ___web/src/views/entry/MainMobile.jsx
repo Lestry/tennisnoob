@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { Button } from 'antd';
+import { Button, InputNumber } from 'antd';
 
 import classnames from 'classnames';
 import { courtTranslate } from '../../utils/courtUtils';
+import draw from '../../utils/draw';
 
 // 引入antd全局样式
 import 'antd/dist/antd.css';
-// 引入main样式
+// 引入main-mobile样式
 import './main-mobile.less';
 
 class MainMobile extends React.PureComponent {
@@ -15,9 +16,20 @@ class MainMobile extends React.PureComponent {
     super(props)
 
     this.state = {
+      // 当前所在tab
       key: this.TABS[0],
+      // 待整理场地
       inputValue: '',
-      outputValue: {}
+      // 场地整理结果
+      outputValue: {},
+      // 抽签信息
+      drawValue: '',
+      // 分组人数
+      groupNum: 4,
+      // 抽签结果
+      drawResult: {},
+      // 是否已抽签
+      drawed: false
     }
   }
 
@@ -96,7 +108,7 @@ class MainMobile extends React.PureComponent {
               type="primary"
               size="small"
               disabled={!outputValue.result}
-              onTouchEnd={this.handleCopyformatedText.bind(this)}
+              onTouchEnd={this.handleCopyFormatedText.bind(this)}
             >
               复制
             </Button>
@@ -115,7 +127,66 @@ class MainMobile extends React.PureComponent {
 
   // 渲染比赛抽签
   renderMatchDraw() {
+    const { drawValue, groupNum, drawResult, drawed } = this.state;
 
+    return (
+      <div className="match-draw">
+        <div className="draw-value a-left-right">
+          <div className="action-title">
+            参赛人员表（以逗号分割，结尾不要逗号）
+            <Button type="primary" size="small" onTouchEnd={this.handleResetDrawValue.bind(this)}>
+              重置
+            </Button>
+          </div>
+          <textarea
+            style={{ height: 'calc(100% - 35px)'}}
+            className="court-text-input-area"
+            onChange={this.handleChangeDrawValue.bind(this)}
+            value={drawValue}
+          />
+        </div>
+        <div className="draw-actions a-left-right">
+          <InputNumber
+            style={{ width: '50%' }}
+            min={1}
+            defaultValue={groupNum}
+            value={groupNum}
+            size="large"
+            onChange={this.handleChangeGroupNum.bind(this)}
+          />
+          <Button
+            type="primary"
+            size="large"
+            style={{ width: '35%', float: 'right' }}
+            disabled={drawed || !drawValue}
+            onTouchEnd={this.handleDraw.bind(this)}
+          >
+            抽签
+          </Button>
+        </div>
+        <div className="draw-result a-left-right">
+          <div className="action-title">
+            结果
+            <span style={{ color: '#cb3333', paddingLeft: '8px' }}>{drawResult.msg}</span>
+            <Button
+              type="primary"
+              size="small"
+              disabled={!drawResult.result}
+              onTouchEnd={this.handleCopyDrawedText.bind(this)}
+            >
+              复制
+            </Button>
+          </div>
+          <textarea
+            style={{ height: 'calc(100% - 35px)' }}
+            ref={(node) => { this.drawedText = node }}
+            className="court-text-input-area"
+            readOnly
+            value={this._getDrawedResult()}
+          />
+        </div>
+      </div>
+    )
   }
 
   // 重置场地整理
@@ -143,10 +214,59 @@ class MainMobile extends React.PureComponent {
   }
 
   // 复制整理好的场地
-  handleCopyformatedText() {
+  handleCopyFormatedText() {
     this.formatedText.select()
     document.execCommand('Copy')
     this.formatedText.blur()
+  }
+
+  // 输入带抽签队员
+  handleChangeDrawValue(e) {
+    const v = e.target.value;
+    this.setState({
+      drawValue: v
+    })
+  }
+
+  // 重置抽签信息
+  handleResetDrawValue() {
+    this.setState({
+      drawValue: '',
+      groupNum: 4,
+      drawResult: {},
+      drawed: false
+    })
+  }
+
+  // 切换人数信息
+  handleChangeGroupNum(v) {
+    this.setState({
+      groupNum: v
+    })
+  }
+
+  // 进行抽签
+  handleDraw() {
+    const { drawValue, groupNum } = this.state
+    const res = draw(drawValue.replace(/[\n\r\s]/g, '').split(/[,，]/), groupNum);
+    if (res.result) {
+      this.setState({
+        drawed: true,
+        drawResult: res
+      })
+    } else {
+      this.setState({
+        drawed: false,
+        drawResult: res
+      })
+    }
+  }
+
+  // 复制抽签结果
+  handleCopyDrawedText() {
+    this.drawedText.select()
+    document.execCommand('Copy')
+    this.drawedText.blur()
   }
 
   // 切换tab
@@ -154,6 +274,31 @@ class MainMobile extends React.PureComponent {
     this.setState({
       key: name
     })
+  }
+
+  _getDrawedResult() {
+    const { drawValue, drawed, drawResult } = this.state
+
+    let arr = drawValue.replace(/[\n\r\s]/g, '').split(/[,，]/);
+    if (arr.length === 1 && !arr[0].trim()) {
+      return '';
+    } else {
+      if (drawed && drawResult.data) {
+        let str = '';
+        Object.keys(drawResult.data).forEach((k) => {
+          str += `===== 第 ${k} 组 =====\n`;
+          str += drawResult.data[k].map((item, index) => {
+            return `No.${index + 1} ${item}`;
+          }).join('\n');
+          str += '\n';
+        })
+        return str;
+      } else {
+        return arr.map((item, index) => {
+          return `No.${index + 1} ${item}`;
+        }).join('\n');
+      }
+    }
   }
 
   TABS = ['场地整理', '比赛抽签'];
