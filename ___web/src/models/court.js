@@ -1,5 +1,4 @@
 export default {
-
   namespace: 'court',
 
   state: {},
@@ -19,6 +18,5 @@ export default {
     save(state, action) {
       return { ...state, ...action.payload };
     },
-  },
-  
+  }
 };

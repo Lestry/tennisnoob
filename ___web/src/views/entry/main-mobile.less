@@ -1,0 +1,125 @@
+/* Main styles */
+html, body, :global(#root) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background: transparent;
+  font-family: Arial,'Microsoft YaHei',"宋体",sans-serif;
+}
+
+ul, ol, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+.a-left-right {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+}
+
+#page {
+  top: 0px;
+  bottom: 0px;
+  z-index: 0;
+  .page-header {
+    top: 0px;
+    height: 50px;
+  }
+  .page-container {
+    top: 50px;
+    bottom: 50px;
+  }
+  .page-bottom {
+    bottom: 0;
+    height: 50px;
+  }
+}
+
+.page-tab-bar {
+  display: flex;
+  flex-direction: row;
+  .page-tab-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+    &.active {
+      color: #a3bb6f;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background-color: #a3bb6f;
+      }
+    }
+  }
+}
+
+.page-container {
+  // 改写按钮颜色
+  .ant-btn-primary {
+    background-color: #a3bb6f;
+    border-color: #a3bb6f;
+    &.active,
+    &:active {
+      background-color: #889d5c;
+      border-color: #889d5c;
+    }
+    &[disabled] {
+      color: rgba(0, 0, 0, 0.25);
+      background-color: #f5f5f5;
+      border-color: #d9d9d9;
+      cursor: not-allowed;
+    }
+  }
+
+  .unformat-court {
+    top: 0;
+    height: 135px;
+    padding: 10px;
+  }
+
+  .court-actions {
+    top: 135px;
+    height: 50px;
+    padding: 10px;
+    line-height: 30px;
+    display: flex;
+    flex-direction: row;
+    .ant-btn {
+      margin: 0 10px;
+      flex: 1;
+    }
+  }
+
+  .formated-court {
+    top: 185px;
+    bottom: 0;
+    padding: 10px;
+  }
+
+  .action-title {
+    height: 35px;
+    line-height: 30px;
+    padding: 0 10px 5px;
+    .ant-btn {
+      float: right;
+    }
+  }
+
+  .court-text-input-area {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

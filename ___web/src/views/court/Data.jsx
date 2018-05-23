@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { connect } from 'dva';
 
@@ -22,7 +22,7 @@ class CourtData extends React.PureComponent {
   render() {
     return (
       <div>
-        抽签工具
+        贡献数据
       </div>
     )
   }

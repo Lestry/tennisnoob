@@ -8,7 +8,7 @@ import { connect } from 'dva';
 
 import _ from 'lodash';
 
-import { SIDE_MENU } from '../constants/index';
+import { SIDE_MENU } from '../../constants/index';
 
 // 引入antd全局样式
 import 'antd/dist/antd.css';
@@ -35,7 +35,7 @@ class Main extends React.PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <div style={this.STYLES.page}>
+      <div id="page">
         <div className="page-header" style={this.STYLES.header}>
           <div className="brand" style={this.STYLES.brand}>
           </div>
@@ -104,15 +104,6 @@ class Main extends React.PureComponent {
   }
 
   STYLES = {
-    // 浏览器区域
-    page: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-      zIndex: 0
-    },
     // 顶部菜单栏
     header: {
       position: 'absolute',
@@ -120,7 +111,7 @@ class Main extends React.PureComponent {
       left: 0,
       right: 0,
       height: 50,
-      background: '#a3bb6f'
+      background: '#096dd9'
     },
     // logo位
     brand: {
@@ -133,7 +124,7 @@ class Main extends React.PureComponent {
     // 页面主要区域
     pageContainer: {
       position: 'absolute',
-      top: 50,
+      top: '50px',
       left: 0,
       right: 0,
       bottom: 0,
@@ -144,7 +135,7 @@ class Main extends React.PureComponent {
       top: 0,
       left: 0,
       bottom: 0,
-      width: 200,
+      width: '200px',
       background: '#fff'
     },
     menuItem: {
@@ -155,9 +146,9 @@ class Main extends React.PureComponent {
       position: 'absolute',
       top: 0,
       bottom: 0,
-      left: 200,
+      left: '200px',
       right: 0,
-      paddingTop: 40
+      paddingTop: '40px'
     },
     // 主视图顶部
     pageTitle: {
@@ -165,7 +156,7 @@ class Main extends React.PureComponent {
       left: 0,
       top: 0,
       right: 0,
-      height: 40,
+      height: '40px',
       padding: '0 20px'
     },
   }

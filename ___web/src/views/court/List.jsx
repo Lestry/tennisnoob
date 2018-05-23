@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { connect } from 'dva';
 
@@ -16,16 +16,21 @@ class CourtList extends React.PureComponent {
   }
 
   componentDidMount() {
-    
+    console.log(this.props)
   }
 
   render() {
     return (
       <div>
-        场地整理
+        场地列表
       </div>
     )
   }
 }
 
-export default connect()(CourtList);
+const stateToProps = state => {
+  console.log('connect stateToProps', state)
+  return {}
+}
+
+export default connect(stateToProps)(CourtList);
