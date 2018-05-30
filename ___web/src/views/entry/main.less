@@ -16,52 +16,42 @@ html, body, :global(#root) {
   top: 0px;
   bottom: 0px;
   z-index: 0;
-  // 头部
-  .page-header {
+  // 侧边菜单
+  .page-side-menu-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background-image: linear-gradient(90deg, #527dfd, #1ba3d8);
-    div.brand {
-      float: left;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 200px;
+    background: #fff;
+    padding-top: 100px;
+    .brand {
+      position: absolute;
+      left: 0;
+      top: 0;
       width: 200px;
-      height: 50px;
-      margin: 0px;
-      padding: 8px 0px 0px 20px;
+      height: 100px;
+      background-image: url(../../assets/logo.png);
+      background-position: center;
+      background-size: auto 80%;
+      background-repeat: no-repeat;
+      border-right: 1px solid #e8e8e8;
     }
   }
   // 页面容器
   .page-container {
     position: absolute;
-    top: 50px;
-    left: 0px;
+    top: 0;
+    left: 200px;
     right: 0px;
     bottom: 0px;
-    .page-side-menu-container {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      bottom: 0px;
-      width: 200px;
-      background: rgb(255, 255, 255);
+    background: rgba(162, 209, 59, 0.05);
+    // 页面内容器
+    .module-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
-  }
-}
-
-// 路由主视图
-#page-main {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 200px;
-  right: 0px;
-  // 页面内容器
-  .module-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
   }
 }
 

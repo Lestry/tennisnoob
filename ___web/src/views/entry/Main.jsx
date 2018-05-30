@@ -39,15 +39,9 @@ class Main extends React.PureComponent {
     const { children } = this.props;
     return (
       <div id="page">
-        <div className="page-header">
-          <div className="brand">
-          </div>
-        </div>
+        {this.renderSideMenu()}
         <div className="container page-container" id="page-container">
-          {this.renderSideMenu()}
-          <div className="page-main" id="page-main" style={this.STYLES.pageMain}>
-            {children}
-          </div>
+          {children}
         </div>
       </div>
     )
@@ -61,6 +55,7 @@ class Main extends React.PureComponent {
     const defaultOpenMenus = SIDE_MENU.map(m => m.key)
     return (
       <div className="page-side-menu-container">
+        <div className="brand" />
         <Menu
           mode="inline"
           className="page-side-menu"
