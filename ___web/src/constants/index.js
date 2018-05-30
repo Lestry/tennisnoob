@@ -2,33 +2,33 @@ const SIDE_MENU = [{
   name: '工具',
   key: '/tool',
   route: '/tool.*',
-  icon: 'share-alt',
+  icon: 'tool',
   sub: [{
     name: '场地整理',
     key: '/tool/court',
     route: '/tool/court.*',
-    icon: 'share-alt'
+    icon: 'profile'
   }, {
     name: '分组抽签',
     key: '/tool/draw',
     route: '/tool/draw.*',
-    icon: 'share-alt'
+    icon: 'trophy'
   }]
 }, {
-  name: '场地',
-  key: '/court',
-  route: '/court.*',
-  icon: 'share-alt',
+  name: '数据',
+  key: '/data',
+  route: '/data.*',
+  icon: 'area-chart',
   sub: [{
-    name: '场地列表',
-    key: '/court/list',
-    route: '/court/list.*',
-    icon: 'share-alt'
+    name: '场地数据',
+    key: '/data/court',
+    route: '/data/court.*',
+    icon: 'line-chart'
   }, {
     name: '贡献数据',
-    key: '/court/data',
-    route: '/court/data.*',
-    icon: 'share-alt'
+    key: '/data/contribute',
+    route: '/data/contribute.*',
+    icon: 'team'
   }]
 }]
 

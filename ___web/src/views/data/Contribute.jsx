@@ -3,7 +3,7 @@ import React from 'react';
 
 import { connect } from 'dva';
 
-class CourtData extends React.PureComponent {
+class ContributeData extends React.PureComponent {
   static propTypes = {
     
   };
@@ -22,15 +22,10 @@ class CourtData extends React.PureComponent {
   render() {
     return (
       <div className="module-container">
-        <div className="page-title">
-          贡献数据
-        </div>
-        <div className="module-content">
-
-        </div>
+        贡献数据(开发中)
       </div>
     )
   }
 }
 
-export default connect()(CourtData);
+export default connect()(ContributeData);
