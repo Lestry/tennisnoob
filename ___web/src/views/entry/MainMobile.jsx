@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, InputNumber } from 'antd';
 
 import classnames from 'classnames';
+import Clipboard from 'clipboard';
 import { courtTranslate } from '../../utils/courtUtils';
 import draw from '../../utils/draw';
 
@@ -30,6 +31,19 @@ class MainMobile extends React.PureComponent {
       drawResult: {},
       // 是否已抽签
       drawed: false
+    }
+
+    this.courtClip = null;
+    this.drawClip = null;
+  }
+
+  componentDidMount() {
+    this._initClip(this.state.key)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.key !== this.state.key) {
+      this._initClip(this.state.key)
     }
   }
 
@@ -105,10 +119,10 @@ class MainMobile extends React.PureComponent {
             结果
             <span style={{ color: '#cb3333', paddingLeft: '8px' }}>{outputValue.msg}</span>
             <Button
+              id="mobile-tool-court-copy-btn"
               type="primary"
               size="small"
               disabled={!outputValue.result}
-              onTouchEnd={this.handleCopyFormatedText.bind(this)}
             >
               复制
             </Button>
@@ -169,10 +183,10 @@ class MainMobile extends React.PureComponent {
             结果
             <span style={{ color: '#cb3333', paddingLeft: '8px' }}>{drawResult.msg}</span>
             <Button
+              id="mobile-tool-draw-copy-btn"
               type="primary"
               size="small"
               disabled={!drawResult.result}
-              onTouchEnd={this.handleCopyDrawedText.bind(this)}
             >
               复制
             </Button>
@@ -211,13 +225,6 @@ class MainMobile extends React.PureComponent {
     this.setState({
       inputValue: v
     })
-  }
-
-  // 复制整理好的场地
-  handleCopyFormatedText() {
-    this.formatedText.select()
-    document.execCommand('Copy')
-    this.formatedText.blur()
   }
 
   // 输入带抽签队员
@@ -262,13 +269,6 @@ class MainMobile extends React.PureComponent {
     }
   }
 
-  // 复制抽签结果
-  handleCopyDrawedText() {
-    this.drawedText.select()
-    document.execCommand('Copy')
-    this.drawedText.blur()
-  }
-
   // 切换tab
   handleChangeTab(name) {
     this.setState({
@@ -298,6 +298,30 @@ class MainMobile extends React.PureComponent {
           return `No.${index + 1} ${item}`;
         }).join('\n');
       }
+    }
+  }
+
+  // 初始化剪贴板
+  _initClip(key) {
+    // 如果key发生了变化时 销毁相应的clip对象
+    if (key === this.TABS[0]) {
+      // 场地整理tab 销毁抽签剪贴板
+      if (this.drawClip && typeof this.drawClip.destroy === 'function') {
+        this.courtClip.destroy();
+      }
+      // 初始化场地整理剪贴板
+      this.courtClip = new Clipboard('#mobile-tool-court-copy-btn', {
+        target: () => this.formatedText
+      });
+    } else {
+      // 抽签tab 销毁场地整理剪贴板
+      if (this.courtClip && typeof this.courtClip.destroy === 'function') {
+        this.courtClip.destroy();
+      }
+      // 初始化抽签剪贴板
+      this.drawClip = new Clipboard('#mobile-tool-draw-copy-btn', {
+        target: () => this.drawedText
+      });
     }
   }
 
