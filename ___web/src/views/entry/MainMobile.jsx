@@ -53,15 +53,15 @@ class MainMobile extends React.PureComponent {
     const { key } = this.state;
 
     return (
-      <div id="page" className="a-left-right">
-        <div className="page-header a-left-right" style={this.STYLES.header}>
+      <div id="page-mobile" className="a-left-right">
+        <div className="page-header-mobile a-left-right" style={this.STYLES.header}>
           {key}
         </div>
-        <div className="page-container a-left-right" id="page-container" style={this.STYLES.container}>
+        <div className="page-container-mobile a-left-right" id="page-container-mobile" style={this.STYLES.container}>
           {key === this.TABS[0] && this.renderCourtFormat()}
           {key === this.TABS[1] && this.renderMatchDraw()}
         </div>
-        <ul className="page-bottom page-tab-bar a-left-right" style={this.STYLES.bottom}>
+        <ul className="page-bottom-mobile page-tab-bar a-left-right" style={this.STYLES.bottom}>
           {
             this.TABS.map(item => (
               <li key={`mobile-page-bottom-tab-bar-item-${item}`}
