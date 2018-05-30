@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from 'antd/lib/icon';
-import Menu from 'antd/lib/menu';
-
+// store
 import { connect } from 'dva';
 
+// 工具方法
 import _ from 'lodash';
 
+// 常量
 import { SIDE_MENU } from '../../constants/index';
+
+// 组件
+import { Icon, Menu } from 'antd';
 
 // 引入antd全局样式
 import 'antd/dist/antd.css';
@@ -36,15 +39,13 @@ class Main extends React.PureComponent {
     const { children } = this.props;
     return (
       <div id="page">
-        <div className="page-header" style={this.STYLES.header}>
-          <div className="brand" style={this.STYLES.brand}>
+        <div className="page-header">
+          <div className="brand">
           </div>
         </div>
-        <div className="container page-container" id="page-container" style={this.STYLES.pageContainer}>
+        <div className="container page-container" id="page-container">
           {this.renderSideMenu()}
           <div className="page-main" id="page-main" style={this.STYLES.pageMain}>
-            <div className="page-main-title" style={this.STYLES.pageTitle}>
-            </div>
             {children}
           </div>
         </div>
@@ -59,7 +60,7 @@ class Main extends React.PureComponent {
     const subRouteKey = currRoute.subRoute ? currRoute.subRoute.key : mainRouteKey
     const defaultOpenMenus = SIDE_MENU.map(m => m.key)
     return (
-      <div className="page-side-menu-container" style={this.STYLES.pageSideMenu}>
+      <div className="page-side-menu-container">
         <Menu
           mode="inline"
           className="page-side-menu"
@@ -104,61 +105,9 @@ class Main extends React.PureComponent {
   }
 
   STYLES = {
-    // 顶部菜单栏
-    header: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 50,
-      background: '#096dd9'
-    },
-    // logo位
-    brand: {
-      float: 'left',
-      width: 200,
-      height: 50,
-      margin: 0,
-      padding: '8px 0 0 20px'
-    },
-    // 页面主要区域
-    pageContainer: {
-      position: 'absolute',
-      top: '50px',
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
-    // 左侧菜单区域
-    pageSideMenu: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      width: '200px',
-      background: '#fff'
-    },
     menuItem: {
       fontSize: '14px'
-    },
-    // router显示区
-    pageMain: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: '200px',
-      right: 0,
-      paddingTop: '40px'
-    },
-    // 主视图顶部
-    pageTitle: {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      right: 0,
-      height: '40px',
-      padding: '0 20px'
-    },
+    }
   }
 }
 

@@ -21,8 +21,13 @@ class CourtData extends React.PureComponent {
 
   render() {
     return (
-      <div>
-        贡献数据
+      <div className="module-container">
+        <div className="page-title">
+          贡献数据
+        </div>
+        <div className="module-content">
+
+        </div>
       </div>
     )
   }

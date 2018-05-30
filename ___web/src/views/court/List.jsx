@@ -21,8 +21,13 @@ class CourtList extends React.PureComponent {
 
   render() {
     return (
-      <div>
-        场地列表
+      <div className="module-container">
+        <div className="page-title">
+          场地列表
+        </div>
+        <div className="module-content">
+
+        </div>
       </div>
     )
   }

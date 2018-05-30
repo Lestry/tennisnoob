@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Button, InputNumber } from 'antd';
-
+// 工具方法
 import classnames from 'classnames';
 import Clipboard from 'clipboard';
 import { courtTranslate } from '../../utils/courtUtils';
 import draw from '../../utils/draw';
+
+// 组件
+import { Button, InputNumber } from 'antd';
 
 // 引入antd全局样式
 import 'antd/dist/antd.css';
@@ -100,7 +102,6 @@ class MainMobile extends React.PureComponent {
           <Button
             type="primary"
             size="small"
-            disabled={!outputValue}
             onTouchEnd={this.handleCourtAction.bind(this, 'format')}
           >
             整理场地
@@ -108,7 +109,6 @@ class MainMobile extends React.PureComponent {
           <Button
             type="primary"
             size="small"
-            disabled={!outputValue}
             onTouchEnd={this.handleCourtAction.bind(this, 'count')}
           >
             统计贡献

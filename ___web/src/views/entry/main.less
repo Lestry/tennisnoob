@@ -16,4 +16,52 @@ html, body, :global(#root) {
   top: 0px;
   bottom: 0px;
   z-index: 0;
+  // 头部
+  .page-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-image: linear-gradient(90deg, #527dfd, #1ba3d8);
+    div.brand {
+      float: left;
+      width: 200px;
+      height: 50px;
+      margin: 0px;
+      padding: 8px 0px 0px 20px;
+    }
+  }
+  // 页面容器
+  .page-container {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    .page-side-menu-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      width: 200px;
+      background: rgb(255, 255, 255);
+    }
+  }
 }
+
+// 路由主视图
+#page-main {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 200px;
+  right: 0px;
+  // 页面内容器
+  .module-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+}
+
