@@ -2,10 +2,5 @@
   "disableCSSModules": true,
   "extraBabelPlugins": [
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
-  ],
-  "outputPath": "../views",
-  "html": {
-    "template": "./template/index.ejs",
-    "filename": "../views/index.ejs"
-  }
+  ]
 }
