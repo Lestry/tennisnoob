@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<navigation-bar title="网球比赛计分" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<view class="container">
+  <view class="match-config">
+    <view class="form-row">
+      <text class="form-label">有无占先</text>
+      <switch class="form-value" disabled="{{matchConfig_lock}}" model:checked="{{matchConfig_hasAd}}" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">决胜局起始局分(X平)</text>
+      <input type="number" class="form-value" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakStart}}" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">决胜局起始局分(抢X)</text>
+      <input type="number" class="form-value" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakPoint}}" />
+    </view>
+    <view class="match-actions">
+      <button class="point-action-btn" type="default" size="mini" bind:tap="handleReset">重置比分</button>
+    </view>
+  </view>
+  <view class="player-info">
+    <view class="playername-wrapper">
+      <text class="playername-label">选手1</text>
+      <input type="text" class="playername-input" placeholder="请输入选手1名称" model:value="{{playerLeft_name}}" />
+    </view>
+    <view class="playername-wrapper">
+      <text class="playername-label">选手2</text>
+      <input type="text" class="playername-input" placeholder="请输入选手2名称" model:value="{{playerRight_name}}" />
+    </view>
+  </view>
+  <view class="match-info">
+    <view class="game-point-wrapper">
+      <view class="game-point-show">
+        <text class="game-point">{{playerLeft_gamePoint}}</text>
+        <text class="point-split">-</text>
+        <text class="game-point">{{playerRight_gamePoint}}</text>
+      </view>
+      <view class="point-action-wrapper">
+        <view class="point-action">
+          <button class="point-action-btn" type="default" size="mini">-</button>
+          <button class="point-action-btn" type="default" size="mini">+</button>
+        </view>
+        <view class="point-action">
+          <button class="point-action-btn" type="default" size="mini">-</button>
+          <button class="point-action-btn" type="default" size="mini">+</button>
+        </view>
+      </view>
+    </view>
+    <view class="set-point-wrapper">
+      <view class="game-point-show">
+        <text class="set-point">{{playerLeft_setPoint}}</text>
+        <text class="point-split">-</text>
+        <text class="set-point">{{playerRight_setPoint}}</text>
+      </view>
+      <view class="point-action-wrapper">
+        <view class="point-action">
+          <button class="point-action-btn" type="default" size="mini">-</button>
+          <button class="point-action-btn" type="default" size="mini">+</button>
+        </view>
+        <view class="point-action">
+          <button class="point-action-btn" type="default" size="mini">-</button>
+          <button class="point-action-btn" type="default" size="mini">+</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
