@@ -4,36 +4,44 @@
   <view class="match-config">
     <view class="form-row">
       <text class="form-label">有无占先</text>
-      <switch class="form-value" disabled="{{matchConfig_lock}}" model:checked="{{matchConfig_hasAd}}" />
+      <view class="form-value">
+        <switch type="checkbox" disabled="{{matchConfig_lock}}" model:checked="{{matchConfig_hasAd}}" />
+      </view>
     </view>
     <view class="form-row">
       <text class="form-label">决胜局起始局分(X平)</text>
-      <input type="number" class="form-value" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakStart}}" />
+      <view class="form-value">
+        <input type="number" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakStart}}" />
+      </view>
     </view>
     <view class="form-row">
       <text class="form-label">决胜局起始局分(抢X)</text>
-      <input type="number" class="form-value" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakPoint}}" />
+      <view class="form-value">
+        <input type="number" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakPoint}}" />
+      </view>
     </view>
-    <view class="match-actions">
-      <button class="point-action-btn" type="default" size="mini" bind:tap="handleReset">重置比分</button>
-    </view>
+    <button class="point-action-btn" type="default" size="mini" bind:tap="handleReset">重置比分</button>
   </view>
   <view class="player-info">
     <view class="playername-wrapper">
-      <text class="playername-label">选手1</text>
-      <input type="text" class="playername-input" placeholder="请输入选手1名称" model:value="{{playerLeft_name}}" />
+      <view class="playername-label">选手1</view>
+      <view class="playername-input">
+        <input type="text" placeholder="请输入选手1名称" model:value="{{playerLeft_name}}" />
+      </view>
     </view>
     <view class="playername-wrapper">
-      <text class="playername-label">选手2</text>
-      <input type="text" class="playername-input" placeholder="请输入选手2名称" model:value="{{playerRight_name}}" />
+      <view class="playername-label">选手2</view>
+      <view class="playername-input">
+        <input type="text" placeholder="请输入选手2名称" model:value="{{playerRight_name}}" />
+      </view>
     </view>
   </view>
   <view class="match-info">
     <view class="game-point-wrapper">
       <view class="game-point-show">
-        <text class="game-point">{{playerLeft_gamePoint}}</text>
-        <text class="point-split">-</text>
-        <text class="game-point">{{playerRight_gamePoint}}</text>
+        <view class="game-point">{{playerLeft_gamePoint}}</view>
+        <view class="point-split">局分</view>
+        <view class="game-point">{{playerRight_gamePoint}}</view>
       </view>
       <view class="point-action-wrapper">
         <view class="point-action">
@@ -48,9 +56,9 @@
     </view>
     <view class="set-point-wrapper">
       <view class="game-point-show">
-        <text class="set-point">{{playerLeft_setPoint}}</text>
-        <text class="point-split">-</text>
-        <text class="set-point">{{playerRight_setPoint}}</text>
+        <view class="set-point">{{playerLeft_setPoint}}</view>
+        <view class="point-split">盘分</view>
+        <view class="set-point">{{playerRight_setPoint}}</view>
       </view>
       <view class="point-action-wrapper">
         <view class="point-action">

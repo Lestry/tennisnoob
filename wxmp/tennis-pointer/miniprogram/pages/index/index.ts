@@ -24,12 +24,22 @@ Component({
   methods: {
     // 重置比分并解锁比赛设置
     handleReset() {
-      this.setData({
-        matchConfig_lock: false,
-        playerLeft_gamePoint: 0,
-        playerLeft_setPoint: 0,
-        playerRight_gamePoint: 0,
-        playerRight_setPoint: 0,
+      wx.showModal({
+        title: '确定重置比分？',
+        content: '当前的比分将被清空，比赛设置保留',
+        confirmText: '确认重置',
+        cancelText: '取消重置',
+        success: ({ confirm }) => {
+          if (confirm) {
+            this.setData({
+              matchConfig_lock: false,
+              playerLeft_gamePoint: 0,
+              playerLeft_setPoint: 0,
+              playerRight_gamePoint: 0,
+              playerRight_setPoint: 0,
+            })
+          }
+        }
       })
     }
   },
