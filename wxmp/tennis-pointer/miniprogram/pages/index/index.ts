@@ -8,9 +8,11 @@ Component({
     matchConfig_lock: false,
     // 比赛设置-是否有占先
     matchConfig_hasAd: false,
+    // 比赛设置-每盘X局获胜
+    matchConfig_setGames: 6,
     // 比赛设置-决胜局开始于X平
     matchConfig_tieBreakStart: 6,
-    // 比赛设置-决胜局分数（抢X）
+    // 比赛设置-决胜局X分获胜
     matchConfig_tieBreakPoint: 7,
     // 选手左：名称、局分、盘分
     playerLeft_name: '',
@@ -22,6 +24,42 @@ Component({
     playerRight_setPoint: 0,
   },
   methods: {
+    // 改变分数
+    changePoint(player: 'playerLeft' | 'playerRight', type: 'gamePoint' | 'setPoint', point: number) {
+      console.log(player, type, point);
+    },
+    // 左侧选手的局分-1
+    handleSubstractPlayerLeftGamePoint() {
+      this.changePoint('playerLeft', 'gamePoint', -1);
+    },
+    // 左侧选手的局分+1
+    handleAddPlayerLeftGamePoint() {
+      this.changePoint('playerLeft', 'gamePoint', +1);
+    },
+    // 右侧选手的局分-1
+    handleSubstractPlayerRightGamePoint() {
+      this.changePoint('playerRight', 'gamePoint', -1);
+    },
+    // 右侧选手的局分+1
+    handleAddPlayerRightGamePoint() {
+      this.changePoint('playerRight', 'gamePoint', +1);
+    },
+    // 左侧选手的盘分-1
+    handleSubstractPlayerLeftSetPoint() {
+      this.changePoint('playerLeft', 'setPoint', -1);
+    },
+    // 左侧选手的盘分+1
+    handleAddPlayerLeftSetPoint() {
+      this.changePoint('playerLeft', 'setPoint', +1);
+    },
+    // 右侧选手的盘分-1
+    handleSubstractPlayerRightSetPoint() {
+      this.changePoint('playerRight', 'setPoint', -1);
+    },
+    // 右侧选手的盘分+1
+    handleAddPlayerRightSetPoint() {
+      this.changePoint('playerRight', 'setPoint', +1);
+    },
     // 重置比分并解锁比赛设置
     handleReset() {
       wx.showModal({

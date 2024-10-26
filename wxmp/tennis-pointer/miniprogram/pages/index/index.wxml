@@ -9,15 +9,21 @@
       </view>
     </view>
     <view class="form-row">
-      <text class="form-label">决胜局起始局分(X平)</text>
+      <text class="form-label">每盘X局获胜</text>
       <view class="form-value">
-        <input type="number" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakStart}}" />
+        <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="3" max="6" model:value="{{matchConfig_setGames}}" />
       </view>
     </view>
     <view class="form-row">
-      <text class="form-label">决胜局起始局分(抢X)</text>
+      <text class="form-label">决胜局起始于X平</text>
       <view class="form-value">
-        <input type="number" disabled="{{matchConfig_lock}}" model:value="{{matchConfig_tieBreakPoint}}" />
+        <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="{{matchConfig_setGames - 1}}" max="{{matchConfig_setGames}}" model:value="{{matchConfig_tieBreakStart}}" />
+      </view>
+    </view>
+    <view class="form-row">
+      <text class="form-label">决胜局X分获胜</text>
+      <view class="form-value">
+        <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="5" max="21" model:value="{{matchConfig_tieBreakPoint}}" />
       </view>
     </view>
     <button class="point-action-btn" type="default" size="mini" bind:tap="handleReset">重置比分</button>
@@ -45,12 +51,12 @@
       </view>
       <view class="point-action-wrapper">
         <view class="point-action">
-          <button class="point-action-btn" type="default" size="mini">-</button>
-          <button class="point-action-btn" type="default" size="mini">+</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleSubstractPlayerLeftGamePoint">-</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleAddPlayerLeftGamePoint">+</button>
         </view>
         <view class="point-action">
-          <button class="point-action-btn" type="default" size="mini">-</button>
-          <button class="point-action-btn" type="default" size="mini">+</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleSubstractPlayerRightGamePoint">-</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleAddPlayerRightGamePoint">+</button>
         </view>
       </view>
     </view>
@@ -62,12 +68,12 @@
       </view>
       <view class="point-action-wrapper">
         <view class="point-action">
-          <button class="point-action-btn" type="default" size="mini">-</button>
-          <button class="point-action-btn" type="default" size="mini">+</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleSubstractPlayerLeftSetPoint">-</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleAddPlayerLeftSetPoint">+</button>
         </view>
         <view class="point-action">
-          <button class="point-action-btn" type="default" size="mini">-</button>
-          <button class="point-action-btn" type="default" size="mini">+</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleSubstractPlayerRightSetPoint">-</button>
+          <button class="point-action-btn" type="default" size="mini" bind:tap="handleAddPlayerRightSetPoint">+</button>
         </view>
       </view>
     </view>
