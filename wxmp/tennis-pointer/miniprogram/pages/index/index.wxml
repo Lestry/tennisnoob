@@ -1,6 +1,8 @@
 <!--index.wxml-->
 <navigation-bar title="网球比赛计分" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <view class="container">
+  <view class="background">
+  </view>
   <view class="match-config">
     <view class="form-row">
       <text class="form-label">有无占先</text>
@@ -9,24 +11,16 @@
       </view>
     </view>
     <view class="form-row">
-      <text class="form-label">每盘X局获胜</text>
-      <view class="form-value">
-        <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="3" max="6" model:value="{{matchConfig_setGames}}" />
-      </view>
-    </view>
-    <view class="form-row">
       <text class="form-label">决胜局起始于X平</text>
       <view class="form-value">
         <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="{{matchConfig_setGames - 1}}" max="{{matchConfig_setGames}}" model:value="{{matchConfig_tieBreakStart}}" />
       </view>
     </view>
-    <view class="form-row">
-      <text class="form-label">决胜局X分获胜</text>
-      <view class="form-value">
-        <slider disabled="{{matchConfig_lock}}" block-size="20" show-value min="5" max="21" model:value="{{matchConfig_tieBreakPoint}}" />
-      </view>
+    <view class="tip">操作说明：小分结束时将自动增加大分，如需要撤销请操作大分并重新计小分；达到设置的X-X平时，将自动开启决胜局的计分模式；需要手动结束比赛，请根据当前的赛制自行决定</view>
+    <view class="match-actions">
+      <button class="point-action-btn" type="primary" size="mini" bind:tap="handleEnd">比赛结束</button>
+      <button class="point-action-btn" type="warn" size="mini" bind:tap="handleReset">重置比分</button>
     </view>
-    <button class="point-action-btn" type="default" size="mini" bind:tap="handleReset">重置比分</button>
   </view>
   <view class="player-info">
     <view class="playername-wrapper">
@@ -45,9 +39,9 @@
   <view class="match-info">
     <view class="game-point-wrapper">
       <view class="game-point-show">
-        <view class="game-point">{{playerLeft_gamePoint}}</view>
-        <view class="point-split">局分</view>
-        <view class="game-point">{{playerRight_gamePoint}}</view>
+        <view class="game-point">{{isTieBreak ? playerLeft_gamePoint : GAME_POINT_SHOW[playerLeft_gamePoint]}}</view>
+        <view class="point-split">小分</view>
+        <view class="game-point">{{isTieBreak ? playerRight_gamePoint : GAME_POINT_SHOW[playerRight_gamePoint]}}</view>
       </view>
       <view class="point-action-wrapper">
         <view class="point-action">
@@ -63,7 +57,7 @@
     <view class="set-point-wrapper">
       <view class="game-point-show">
         <view class="set-point">{{playerLeft_setPoint}}</view>
-        <view class="point-split">盘分</view>
+        <view class="point-split">大分</view>
         <view class="set-point">{{playerRight_setPoint}}</view>
       </view>
       <view class="point-action-wrapper">
